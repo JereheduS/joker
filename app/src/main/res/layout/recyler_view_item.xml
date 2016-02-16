@@ -4,8 +4,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="公告"
+        android:id="@+id/text"
+        android:text="世界你好"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:src="@drawable/ic_launcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <include layout="@layout/recyler_view"/>
 </LinearLayout>

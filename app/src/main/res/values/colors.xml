@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="theme_color">#785447</color>
+    <color name="status_color">#5c3f36</color>
+    <color name="accent_color">#ccdb38</color>
+</resources>

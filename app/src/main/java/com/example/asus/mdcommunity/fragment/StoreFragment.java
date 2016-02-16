@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.mdcommunity.R;
 import com.example.asus.mdcommunity.adapter.MyRecyclerViewAdapter;
+import com.example.asus.mdcommunity.util.DividerItemDecoration;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,7 @@ public class StoreFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyler_view);
         MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(getActivity(),new ArrayList<String>());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter);
     }
 }

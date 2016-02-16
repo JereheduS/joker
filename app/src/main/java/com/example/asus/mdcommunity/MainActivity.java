@@ -1,11 +1,16 @@
 package com.example.asus.mdcommunity;
 
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.example.asus.mdcommunity.adapter.MyFragmentAdapter;
 import com.example.asus.mdcommunity.fragment.ActivityFragment;
@@ -38,11 +43,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView(){
+        //
+        final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    //切换相应 Fragment 等操作
+                    menuItem.setChecked(true);
+                    mDrawerLayout.closeDrawers();
+                    return false;
+                }
+            });
+        }
+
         // init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("社联");
         toolbar.setNavigationIcon(R.mipmap.iconfont_gengduo);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
 
         // init tablayout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

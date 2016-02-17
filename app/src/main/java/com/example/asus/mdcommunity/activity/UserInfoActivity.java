@@ -1,5 +1,6 @@
 package com.example.asus.mdcommunity.activity;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
@@ -9,14 +10,14 @@ import android.view.Window;
 
 import com.example.asus.mdcommunity.R;
 
-public class UserInfoActivity extends AppCompatActivity {
+public class UserInfoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // 设置转场动画
-        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         getWindow().setEnterTransition(new Explode());
         getWindow().setExitTransition(new Explode());
 

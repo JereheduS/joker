@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
     <com.example.asus.mdcommunity.util.RoundImageView
         android:id="@+id/user_icon"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:src="@drawable/default_round_head"
         android:layout_width="wrap_content"

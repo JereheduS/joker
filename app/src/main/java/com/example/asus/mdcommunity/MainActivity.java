@@ -1,5 +1,8 @@
 package com.example.asus.mdcommunity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
@@ -8,16 +11,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnimationSet;
+import android.view.animation.Interpolator;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.mdcommunity.adapter.MyFragmentAdapter;
 import com.example.asus.mdcommunity.fragment.ActivityFragment;
 import com.example.asus.mdcommunity.fragment.BusinessFragment;
 import com.example.asus.mdcommunity.fragment.NoticeFragment;
 import com.example.asus.mdcommunity.fragment.StoreFragment;
+import com.example.asus.mdcommunity.util.DpAndPxUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private List<Fragment> myFragments;
     private List<String>   myTitles;
+
     private BusinessFragment businessFragment;
     private ActivityFragment activityFragment;
     private NoticeFragment   noticeFragment;
     private StoreFragment    storeFragment;
+
+    private boolean isOpen;     // 判断fab是否展开
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView(){
-        //
+        // 侧边栏
         final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         if (navigationView != null) {
@@ -86,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager(),myFragments,myTitles);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        // init fab
+        initFab();
     }
 
     private void initTabTitles() {
@@ -117,23 +133,96 @@ public class MainActivity extends AppCompatActivity {
         myFragments.add(noticeFragment);
     }
 
+    private void initFab(){
+        final ImageView img_shade = (ImageView) findViewById(R.id.shade);
+        img_shade.setVisibility(View.GONE);
+        final FloatingActionButton fab_menu,shopping_car,add_business,add_activity,add_notice;
+        fab_menu     = (FloatingActionButton) findViewById(R.id.fab_menu);
+        shopping_car = (FloatingActionButton) findViewById(R.id.shopping_car);
+        add_business = (FloatingActionButton) findViewById(R.id.add_business);
+        add_activity = (FloatingActionButton) findViewById(R.id.add_activity);
+        add_notice   = (FloatingActionButton) findViewById(R.id.add_notice);
+
+        img_shade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isOpen){
+                    ObjectAnimator animator0 = ObjectAnimator.ofFloat(shopping_car,"translationY",DpAndPxUtil.dip2px(MainActivity.this,-60),DpAndPxUtil.dip2px(MainActivity.this,0));
+                    ObjectAnimator animator1 = ObjectAnimator.ofFloat(add_business, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -115), DpAndPxUtil.dip2px(MainActivity.this, -0));
+                    ObjectAnimator animator2 = ObjectAnimator.ofFloat(add_activity, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -170), DpAndPxUtil.dip2px(MainActivity.this, 0));
+                    ObjectAnimator animator3 = ObjectAnimator.ofFloat(add_notice, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -225), DpAndPxUtil.dip2px(MainActivity.this, 0));
+                    ObjectAnimator animator4 = ObjectAnimator.ofFloat(fab_menu, "rotation", 135f, 0f);
+                    ObjectAnimator animator5 = ObjectAnimator.ofFloat(img_shade, "alpha", 1f, 0f);
+                    AnimatorSet animSet = new AnimatorSet();
+                    animSet.play(animator0).with(animator1).with(animator2).with(animator3).with(animator4).with(animator5);
+                    animSet.setDuration(250);
+                    animSet.start();
+                    isOpen = false;
+                    img_shade.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            img_shade.setVisibility(View.GONE);
+                        }
+                    },250);
+                }
+            }
+        });
+
+        fab_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isOpen){
+                    if (img_shade.getVisibility() == View.GONE) {
+                        img_shade.setVisibility(View.VISIBLE);
+                    }
+                    ObjectAnimator animator0 = ObjectAnimator.ofFloat(shopping_car, "translationY", DpAndPxUtil.dip2px(MainActivity.this, 0), DpAndPxUtil.dip2px(MainActivity.this, -60));
+                    ObjectAnimator animator1 = ObjectAnimator.ofFloat(add_business, "translationY", DpAndPxUtil.dip2px(MainActivity.this, 0), DpAndPxUtil.dip2px(MainActivity.this, -115));
+                    ObjectAnimator animator2 = ObjectAnimator.ofFloat(add_activity, "translationY", DpAndPxUtil.dip2px(MainActivity.this, 0), DpAndPxUtil.dip2px(MainActivity.this, -170));
+                    ObjectAnimator animator3 = ObjectAnimator.ofFloat(add_notice, "translationY", DpAndPxUtil.dip2px(MainActivity.this, 0), DpAndPxUtil.dip2px(MainActivity.this, -225));
+                    ObjectAnimator animator4 = ObjectAnimator.ofFloat(fab_menu, "rotation", 0f, 135f);
+                    ObjectAnimator animator5 = ObjectAnimator.ofFloat(img_shade, "alpha", 0f, 1f);
+                    AnimatorSet animSet = new AnimatorSet();
+                    animSet.play(animator0).with(animator1).with(animator2).with(animator3).with(animator4).with(animator5);
+                    animSet.setDuration(250);
+                    animSet.start();
+                    isOpen = true;
+                }else{
+                    ObjectAnimator animator0 = ObjectAnimator.ofFloat(shopping_car,"translationY",DpAndPxUtil.dip2px(MainActivity.this,-60),DpAndPxUtil.dip2px(MainActivity.this,0));
+                    ObjectAnimator animator1 = ObjectAnimator.ofFloat(add_business, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -115), DpAndPxUtil.dip2px(MainActivity.this, -0));
+                    ObjectAnimator animator2 = ObjectAnimator.ofFloat(add_activity, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -170), DpAndPxUtil.dip2px(MainActivity.this, 0));
+                    ObjectAnimator animator3 = ObjectAnimator.ofFloat(add_notice, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -225), DpAndPxUtil.dip2px(MainActivity.this, 0));
+                    ObjectAnimator animator4 = ObjectAnimator.ofFloat(fab_menu, "rotation", 135f, 0f);
+                    ObjectAnimator animator5 = ObjectAnimator.ofFloat(img_shade, "alpha", 1f, 0f);
+                    AnimatorSet animSet = new AnimatorSet();
+                    animSet.play(animator0).with(animator1).with(animator2).with(animator3).with(animator4).with(animator5);
+                    animSet.setDuration(250);
+                    animSet.start();
+                    isOpen = false;
+                    img_shade.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            img_shade.setVisibility(View.GONE);
+                        }
+                    },250);
+                }
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == R.id.action_search){
+            Toast.makeText(this,"你要搜啥",Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);

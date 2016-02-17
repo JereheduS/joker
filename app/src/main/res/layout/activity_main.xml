@@ -44,7 +44,53 @@
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+        <ImageView
+            android:id="@+id/shade"
+            android:background="@color/shade_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/shopping_car"
+            app:fabSize="mini"
+            style="@style/MyFabStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/accent_color"
+            android:src="@drawable/ic_shopping_cart_white_32dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_business"
+            app:fabSize="mini"
+            style="@style/MyFabStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/accent_color"
+            android:src="@drawable/ic_add_white_36dp" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_activity"
+            app:fabSize="mini"
+            style="@style/MyFabStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/accent_color"
+            android:src="@drawable/ic_add_white_36dp" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_notice"
+            app:fabSize="mini"
+            style="@style/MyFabStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/accent_color"
+            android:src="@drawable/ic_add_white_36dp" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

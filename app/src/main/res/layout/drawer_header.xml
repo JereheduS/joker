@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/theme_color"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:src="@drawable/ic_launcher"
+    <com.example.asus.mdcommunity.util.RoundImageView
+        android:id="@+id/user_icon"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:src="@drawable/default_round_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/login"
+        android:text="尚未登录"
+        android:layout_margin="20dp"
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content" />
 </LinearLayout>

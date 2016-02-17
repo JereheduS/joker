@@ -14,6 +14,7 @@
     <TextView
         android:id="@+id/login"
         android:text="尚未登录"
+        android:textColor="@color/white"
         android:layout_margin="20dp"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"

@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         // init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("社联");
-        toolbar.setNavigationIcon(R.mipmap.iconfont_gengduo);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_36dp);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,4 +6,5 @@
     <color name="white">#fff</color>
     <color name="shade_color">#92efefef</color>
     <color name="secondary_text">#727272</color>
+    <color name="tab_nor_color">#6cffffff</color>
 </resources>

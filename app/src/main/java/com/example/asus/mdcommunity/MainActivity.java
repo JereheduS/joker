@@ -2,6 +2,8 @@ package com.example.asus.mdcommunity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,17 +13,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationSet;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.asus.mdcommunity.activity.UserInfoActivity;
 import com.example.asus.mdcommunity.adapter.MyFragmentAdapter;
 import com.example.asus.mdcommunity.fragment.ActivityFragment;
 import com.example.asus.mdcommunity.fragment.BusinessFragment;
@@ -50,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 设置转场动画
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setEnterTransition(new Explode());
+        getWindow().setExitTransition(new Explode());
+
         setContentView(R.layout.activity_main);
 
         // 初始化视图
@@ -67,6 +78,29 @@ public class MainActivity extends AppCompatActivity {
                     //切换相应 Fragment 等操作
                     menuItem.setChecked(true);
                     mDrawerLayout.closeDrawers();
+
+                    Intent intent ;
+                    switch (menuItem.getItemId()){
+                        case R.id.nav_info:
+                            intent = new Intent(MainActivity.this, UserInfoActivity.class);
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            break;
+                        case R.id.nav_friends:
+                            Toast.makeText(MainActivity.this,"2",Toast.LENGTH_LONG).show();
+                            break;
+                        case R.id.nav_trends:
+                            Toast.makeText(MainActivity.this,"3",Toast.LENGTH_LONG).show();
+                            break;
+                        case R.id.nav_feedback:
+                            Toast.makeText(MainActivity.this,"4",Toast.LENGTH_LONG).show();
+                            break;
+                        case R.id.nav_version:
+                            Toast.makeText(MainActivity.this,"5",Toast.LENGTH_LONG).show();
+                            break;
+                        case R.id.nav_us:
+                            Toast.makeText(MainActivity.this,"6",Toast.LENGTH_LONG).show();
+                            break;
+                    }
                     return false;
                 }
             });

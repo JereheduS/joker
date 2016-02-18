@@ -47,7 +47,7 @@ public class UserInfoActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                UserInfoActivity.this.finishAfterTransition();
+                UserInfoActivity.this.finish();
             }
         });
     }

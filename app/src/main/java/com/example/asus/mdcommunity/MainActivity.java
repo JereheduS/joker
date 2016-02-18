@@ -28,8 +28,10 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationSet;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.asus.mdcommunity.activity.LoginActivity;
 import com.example.asus.mdcommunity.activity.UserInfoActivity;
 import com.example.asus.mdcommunity.adapter.MyFragmentAdapter;
 import com.example.asus.mdcommunity.fragment.ActivityFragment;
@@ -37,6 +39,7 @@ import com.example.asus.mdcommunity.fragment.BusinessFragment;
 import com.example.asus.mdcommunity.fragment.NoticeFragment;
 import com.example.asus.mdcommunity.fragment.StoreFragment;
 import com.example.asus.mdcommunity.util.DpAndPxUtil;
+import com.kogitune.activity_transition.ActivityTransitionLauncher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,8 +76,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView(){
         // 侧边栏
-        final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        final DrawerLayout mDrawerLayout  = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView     navigationView = (NavigationView) findViewById(R.id.navigation);
+        LinearLayout       header_view    = (LinearLayout) findViewById(R.id.header_view);
+        header_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -213,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         fab_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isOpen){
+                if (!isOpen) {
                     if (img_shade.getVisibility() == View.GONE) {
                         img_shade.setVisibility(View.VISIBLE);
                     }
@@ -228,8 +240,8 @@ public class MainActivity extends AppCompatActivity {
                     animSet.setDuration(250);
                     animSet.start();
                     isOpen = true;
-                }else{
-                    ObjectAnimator animator0 = ObjectAnimator.ofFloat(shopping_car,"translationY",DpAndPxUtil.dip2px(MainActivity.this,-60),DpAndPxUtil.dip2px(MainActivity.this,0));
+                } else {
+                    ObjectAnimator animator0 = ObjectAnimator.ofFloat(shopping_car, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -60), DpAndPxUtil.dip2px(MainActivity.this, 0));
                     ObjectAnimator animator1 = ObjectAnimator.ofFloat(add_business, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -115), DpAndPxUtil.dip2px(MainActivity.this, -0));
                     ObjectAnimator animator2 = ObjectAnimator.ofFloat(add_activity, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -170), DpAndPxUtil.dip2px(MainActivity.this, 0));
                     ObjectAnimator animator3 = ObjectAnimator.ofFloat(add_notice, "translationY", DpAndPxUtil.dip2px(MainActivity.this, -225), DpAndPxUtil.dip2px(MainActivity.this, 0));
@@ -245,10 +257,11 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             img_shade.setVisibility(View.GONE);
                         }
-                    },250);
+                    }, 250);
                 }
             }
         });
+
     }
 
     @Override

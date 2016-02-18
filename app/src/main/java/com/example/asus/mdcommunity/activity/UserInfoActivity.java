@@ -29,8 +29,8 @@ public class UserInfoActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
 
-        getWindow().setEnterTransition(new Explode());
-        getWindow().setExitTransition(new Explode());
+//        getWindow().setEnterTransition(new Explode());
+//        getWindow().setExitTransition(new Explode());
 
         setContentView(R.layout.activity_user_info);
 
@@ -47,7 +47,7 @@ public class UserInfoActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserInfoActivity.this.finishAfterTransition();
+//                UserInfoActivity.this.finishAfterTransition();
             }
         });
     }

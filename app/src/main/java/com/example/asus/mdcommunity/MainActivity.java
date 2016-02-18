@@ -7,6 +7,8 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
@@ -60,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
 
-        getWindow().setEnterTransition(new Explode());
-        getWindow().setExitTransition(new Explode());
+//        getWindow().setEnterTransition(new Explode());
+//        getWindow().setExitTransition(new Explode());
 
         setContentView(R.layout.activity_main);
 
@@ -84,8 +86,12 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent ;
                     switch (menuItem.getItemId()){
                         case R.id.nav_info:
-                            intent = new Intent(MainActivity.this, UserInfoActivity.class);
-                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+//                            intent = new Intent(MainActivity.this, UserInfoActivity.class);
+//                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+//                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+//                                    activity, transitionView, DetailActivity.EXTRA_IMAGE);
+//                            ActivityCompat.startActivity(activity, new Intent(activity, DetailActivity.class),
+//                                    options.toBundle());
                             break;
                         case R.id.nav_friends:
                             Toast.makeText(MainActivity.this,"2",Toast.LENGTH_LONG).show();

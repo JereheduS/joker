@@ -35,12 +35,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         MyViewHold myViewHold = (MyViewHold) holder;
-
+        myViewHold.textView.setText(items.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return items.size();
     }
 
     class MyViewHold extends RecyclerView.ViewHolder{
